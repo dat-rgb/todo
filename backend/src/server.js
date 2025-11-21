@@ -3,20 +3,32 @@ import taskRoute from './routes/taskRoutes.js';
 import { connectDB } from './config/db.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path'
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5001
-
+const __dirname = path.resolve();
 const app = express();
 
 connectDB();
 
 //middlewares
 app.use(express.json());
-app.use(cors({ origin: '*' }));
+if(process.env.NODE_ENV !== "production"){
+    app.use(cors({ origin: '*' }));
+}
 
 app.use("/api/tasks",taskRoute);
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("*", (req,res) => {
+        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    });
+}
+
 
 app.listen(PORT, () => {
     console.log(`server bắt đầu trên cổng ${PORT}`);
