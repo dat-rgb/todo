@@ -18,18 +18,20 @@
 - **Backend:** Node.js, Express.js, MongoDB  
 - **Deployment:** Render  
 - **Tools:** VSCode, Postman (kiểm tra API)
+  
+## 🔗 Demo
+Truy cập ứng dụng trực tiếp tại: [Todo WebApp Live Demo](https://todo-82hz.onrender.com/)
 
 ## ⚡ Cách chạy dự án
 
-//backend
 ```bash
 cd backend
 npm install
 cp .env.example .env   # điền thông tin MongoDB
 npm run dev
 
-//frontend
-```bash
 cd frontend
 npm install
 npm run dev
+
+
